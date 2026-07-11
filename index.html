@@ -227,7 +227,7 @@
     .mobile-menu .mob-cta { margin-top: 1rem; background: var(--blue-bright); color: #fff !important; text-align: center; border-radius: 10px; padding: 0.85rem !important; border-bottom: none !important; font-weight: 600 !important; }
 
     /* HERO */
-    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 10rem max(5vw, calc((100% - 1240px) / 2)) 6rem; position: relative; overflow: hidden; gap: 3rem; }
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 7rem max(5vw, calc((100% - 1240px) / 2)) 6rem; position: relative; overflow: hidden; gap: 3rem; }
     .hero-content { display: flex; flex-direction: column; align-items: flex-start; position: relative; z-index: 1; }
     .hero-anim-wrap { display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; align-self: center; min-height: 520px; }
     .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 75% 40%, rgba(37,99,235,0.07) 0%, transparent 65%), radial-gradient(ellipse 40% 40% at 20% 70%, rgba(37,99,235,0.04) 0%, transparent 60%); }
@@ -244,7 +244,7 @@
     .btn-primary:hover { background: var(--blue-electric); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.35); }
     .btn-outline { background: #fff; color: var(--blue-bright); padding: 0.85rem 2rem; border-radius: 10px; font-size: 0.95rem; font-weight: 500; text-decoration: none; cursor: pointer; border: 1px solid var(--blue-bright); transition: border-color 0.2s, background 0.2s, transform 0.15s; }
     .btn-outline:hover { background: #eff5ff; transform: translateY(-2px); }
-    .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; position: relative; z-index: 1; animation: fadeUp 0.7s 0.4s ease both; flex-wrap: wrap; }
+    .hero-stats { display: flex; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
     .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
     .stat-num { font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; color: var(--ink); }
     .stat-label { font-size: 0.8rem; color: var(--gray); }
@@ -352,8 +352,7 @@
       .hero-actions { flex-direction: column; align-items: center; }
       .btn-primary, .btn-outline { text-align: center; width: 100%; }
       .hero-content { align-items: center; text-align: center; }
-      .about-content { text-align: center; }
-      .about-content .section-sub { margin-left: auto; margin-right: auto; }
+      .about-content .section-sub { text-align: center; margin-left: auto; margin-right: auto; }
       .services-header { align-items: center; text-align: center; }
       .services-header .section-sub { margin-left: auto; margin-right: auto; }
       footer { justify-content: center; text-align: center; }
@@ -420,20 +419,6 @@
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Kérj ajánlatot</a>
       <a href="#services" class="btn-outline">Szolgáltatások →</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-num">100+</span>
-        <span class="stat-label">Elégedett ügyfél</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">24h</span>
-        <span class="stat-label">Átlagos válaszidő</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">10+</span>
-        <span class="stat-label">Év tapasztalat</span>
-      </div>
     </div>
   </div>
 
@@ -784,6 +769,20 @@
       <div class="feat-row"><div class="feat-dot"></div> Sürgős esetben hétvégén is elérsz</div>
       <div class="feat-row"><div class="feat-dot"></div> Kimegyek hozzád, vagy távolról oldom meg</div>
       <div class="feat-row"><div class="feat-dot"></div> Ugyanaz a telefonszám hónapok múlva is</div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num" data-target="100" data-suffix="+">0+</span>
+        <span class="stat-label">Elégedett ügyfél</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="24" data-suffix="h">0h</span>
+        <span class="stat-label">Átlagos válaszidő</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="10" data-suffix="+">0+</span>
+        <span class="stat-label">Év tapasztalat</span>
+      </div>
     </div>
   </div>
 
@@ -1211,6 +1210,19 @@
       }
     });
   }, { threshold: 0.1 });
+
+  // Counter animation
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target, target = +el.dataset.target, suffix = el.dataset.suffix || '';
+      let start = null;
+      const tick = ts => { if (!start) start = ts; const p = Math.min((ts - start) / 1200, 1); el.textContent = Math.floor(p * target) + suffix; if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+      counterObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num[data-target]').forEach(el => counterObs.observe(el));
 
   document.querySelectorAll('.service-card, .why-item, .about-card, .faq-item').forEach(el => {
     el.style.opacity = '0';
