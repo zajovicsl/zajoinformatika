@@ -203,7 +203,7 @@
       border-bottom: 1px solid rgba(15,42,67,0.08);
     }
     .nav-logo { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--ink); text-decoration: none; letter-spacing: -0.03em; flex-shrink: 0; display: flex; align-items: center; gap: 0.55rem; }
-    .nav-logo span { color: var(--blue-bright); }
+    .nav-brand > span { color: var(--blue-bright); }
     .logo-mark { height: 1.65rem; width: auto; display: block; flex-shrink: 0; }
     .nav-links { display: flex; gap: 2.2rem; list-style: none; }
     .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
@@ -271,7 +271,7 @@
 
     /* SERVICES */
     #services { border-top: 1px solid rgba(15,42,67,0.08); background: var(--blue-dark); }
-    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+    .services-header { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 3.5rem; gap: 1rem; }
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
     .service-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; cursor: default; box-shadow: var(--card-shadow); }
     .service-card:hover { border-color: rgba(37,99,235,0.4); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,42,67,0.1); }
@@ -334,7 +334,7 @@
     /* FOOTER */
     footer { border-top: 1px solid rgba(15,42,67,0.08); padding: 2.5rem max(5vw, calc((100% - 1240px) / 2)); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--ink); display: flex; align-items: center; gap: 0.55rem; }
-    .footer-logo span { color: var(--blue-bright); }
+    .footer-logo .nav-brand > span { color: var(--blue-bright); }
     .footer-copy { font-size: 0.8rem; color: var(--gray); }
 
     /* RESPONSIVE */
@@ -346,12 +346,17 @@
       #about { grid-template-columns: 1fr; gap: 3rem; }
       .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
       .form-row { grid-template-columns: 1fr; }
-      .hero-stats { gap: 2rem; }
-      .services-header { flex-direction: column; align-items: flex-start; }
+      .hero-stats { gap: 2rem; justify-content: center; }
       .services-header .section-sub { max-width: 100% !important; }
       section { padding: 4rem 5vw; }
-      .hero-actions { flex-direction: column; }
+      .hero-actions { flex-direction: column; align-items: center; }
       .btn-primary, .btn-outline { text-align: center; width: 100%; }
+      .hero-content { align-items: center; text-align: center; }
+      .about-content { text-align: center; }
+      .about-content .section-sub { margin-left: auto; margin-right: auto; }
+      .services-header { align-items: center; text-align: center; }
+      .services-header .section-sub { margin-left: auto; margin-right: auto; }
+      footer { justify-content: center; text-align: center; }
     }
     @media (max-width: 480px) {
       h1 { font-size: 2.4rem; } .section-title { font-size: 1.6rem; }
@@ -374,8 +379,7 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">
-    <svg class="logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="28" height="28" rx="6" fill="#2563eb"/><path d="M7 8.5h14L7 19.5h14" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Zajo<span>Informatika</span>
+    <svg class="logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="28" height="28" rx="6" fill="#2563eb"/><path d="M7 8.5h14L7 19.5h14" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-brand">Zajo<span>Informatika</span></span>
   </a>
   <ul class="nav-links">
     <li><a href="#about">Rólam</a></li>
@@ -407,11 +411,7 @@
 
   <div class="hero-content">
     <div class="hero-badge">Budapest és környéke · ha elromlott valami, megoldom</div>
-    <h1>
-      Számítógép- és<br />
-      laptopszerviz<br />
-      Budapesten. <span class="highlight">Megoldom.</span>
-    </h1>
+    <h1>Laptop és<br />PC szerviz<br />Budapesten. <span class="highlight">Megoldom.</span></h1>
     <p class="hero-sub">
       Elromlott a laptop, akadozik a net, vagy weboldal kellene?
       Budapesten és környékén egyetlen emberre van szükséged hozzá:
@@ -773,7 +773,7 @@
 <section id="about">
   <div class="about-content">
     <p class="section-label">Rólam</p>
-    <h2 class="section-title">Nem szerviz.<br />Nem call center.<br />Én.</h2>
+    <h2 class="section-title">Nem call center.<br />Én.</h2>
     <p class="section-sub">
       Nálam nem kapsz sorszámot, amire majd valaki egyszer visszahív.
       Az elejétől a végéig velem beszélsz: én nézem meg a gépet,
@@ -817,11 +817,6 @@
       <p class="section-label">Szolgáltatások</p>
       <h2 class="section-title">Amiben<br />tudok segíteni</h2>
     </div>
-    <p class="section-sub" style="max-width: 340px;">
-      A laptopszerviztől a weboldalig szinte minden hétköznapi
-      IT-gondot megoldok, egy kézből. Ha nem találod a listában,
-      amit keresel, attól még nyugodtan kérdezz.
-    </p>
   </div>
 
   <div class="services-grid">
@@ -1084,7 +1079,7 @@
           <div class="c-icon">📍</div>
           <div>
             <div class="c-label">Helyszín</div>
-            <div class="c-value">Budapest és környéke</div>
+            <div class="c-value">Budapest XI. kerület</div>
           </div>
         </div>
       </div>
@@ -1139,8 +1134,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
-    <svg class="logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="28" height="28" rx="6" fill="#2563eb"/><path d="M7 8.5h14L7 19.5h14" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Zajo<span>Informatika</span>
+    <svg class="logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="28" height="28" rx="6" fill="#2563eb"/><path d="M7 8.5h14L7 19.5h14" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-brand">Zajo<span>Informatika</span></span>
   </div>
   <div class="footer-copy">© 2026 ZajoInformatika – Minden jog fenntartva.</div>
 </footer>
