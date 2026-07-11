@@ -1,0 +1,13 @@
+# Vercel local config
+.vercel/
+
+# Backup files
+index_old.html
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code session files
+.claude/
