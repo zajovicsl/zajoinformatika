@@ -275,6 +275,10 @@
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
     .service-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; cursor: default; box-shadow: var(--card-shadow); }
     .service-card:hover { border-color: rgba(37,99,235,0.4); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,42,67,0.1); }
+    .services-cta { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 2.5rem; padding: 1.5rem 2rem; background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; flex-wrap: wrap; }
+    .services-cta p { color: var(--text); font-size: 0.95rem; line-height: 1.5; margin: 0; }
+    .float-cta { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 99; width: 52px; height: 52px; background: var(--blue-bright); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,99,235,0.35); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+    .float-cta:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,99,235,0.5); }
     .s-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
     .s-title { font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--ink); }
     .s-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
@@ -350,6 +354,8 @@
       .services-header .section-sub { max-width: 100% !important; }
       section { padding: 4rem 5vw; }
       .hero-actions { flex-direction: column; align-items: center; }
+      .services-cta { flex-direction: column; align-items: flex-start; }
+      .float-cta { bottom: 1.2rem; right: 1.2rem; width: 46px; height: 46px; }
       .btn-primary, .btn-outline { text-align: center; width: 100%; }
       .hero-content { align-items: center; text-align: center; }
       .services-header { align-items: center; text-align: center; }
@@ -874,6 +880,10 @@
       <span class="s-tag">Egyéb</span>
     </div>
   </div>
+  <div class="services-cta">
+    <p>Megtaláltad amit keresel? <strong>Írj, és egy napon belül válaszolok.</strong></p>
+    <a href="#contact" class="btn-primary">Üzenetet írok</a>
+  </div>
 </section>
 
 <!-- WHY -->
@@ -1230,6 +1240,10 @@
     observer.observe(el);
   });
 </script>
+
+<a href="#contact" class="float-cta" aria-label="Kapcsolat felvétele">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+</a>
 
 </body>
 </html>
