@@ -283,7 +283,8 @@
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
 
     h1 { font-family: 'Manrope', sans-serif; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--ink); position: relative; z-index: 1; animation: fadeUp 0.7s 0.1s ease both; }
-    h1 .highlight { color: var(--blue-bright); }
+    h1 .highlight { color: var(--blue-bright); display: inline-block; transition: opacity 0.25s ease; }
+    h1 .highlight.fading { opacity: 0; }
     .hero-sub { margin-top: 1.5rem; max-width: 520px; font-size: 1.1rem; color: var(--gray); line-height: 1.7; position: relative; z-index: 1; animation: fadeUp 0.7s 0.2s ease both; }
     .hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; position: relative; z-index: 1; animation: fadeUp 0.7s 0.3s ease both; flex-wrap: wrap; }
     .btn-primary { background: var(--blue-bright); color: #fff; padding: 0.85rem 2rem; border-radius: 10px; font-size: 0.95rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(37,99,235,0.25); }
@@ -392,7 +393,7 @@
     @media (max-width: 768px) {
       .nav-links { display: none; } .nav-cta { display: none; } .hamburger { display: flex; }
       #hero { grid-template-columns: 1fr; padding: 6rem 5vw 4rem; gap: 2rem; }
-      .hero-anim-wrap { min-height: 320px; }
+      .hero-anim-wrap { display: none; }
       #about { grid-template-columns: 1fr; gap: 3rem; }
       .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
       .form-row { grid-template-columns: 1fr; }
@@ -413,7 +414,7 @@
       .hero-stats { gap: 1.5rem; } .stat-num { font-size: 1.6rem; }
       .why-grid { grid-template-columns: 1fr; } .services-grid { grid-template-columns: 1fr; }
       nav { padding: 1rem 4vw; } .about-card { padding: 1.5rem; } .why-item { padding: 1.3rem; }
-      .service-card { padding: 1.5rem; } .hero-anim-wrap { min-height: 260px; }
+      .service-card { padding: 1.5rem; }
     }
 
     /* USED DEVICES (HAMAROSAN) */
@@ -1296,6 +1297,21 @@
       }
     });
   });
+
+  // Hero highlight word rotation
+  const rotatingWords = ['Megoldom.', 'Megjavítom.', 'Telepítem.', 'Beállítom.', 'Kicserélem.', 'Megtisztítom.'];
+  let wordIndex = 0;
+  const highlightEl = document.querySelector('h1 .highlight');
+  if (highlightEl) {
+    setInterval(() => {
+      highlightEl.classList.add('fading');
+      setTimeout(() => {
+        wordIndex = (wordIndex + 1) % rotatingWords.length;
+        highlightEl.textContent = rotatingWords[wordIndex];
+        highlightEl.classList.remove('fading');
+      }, 250);
+    }, 2500);
+  }
 
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
