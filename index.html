@@ -393,7 +393,7 @@
     @media (max-width: 900px) { .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; } .faq-intro { position: static; } }
     @media (max-width: 768px) {
       .nav-links { display: none; } .nav-cta { display: none; } .hamburger { display: flex; }
-      #hero { grid-template-columns: 1fr; padding: 6rem 5vw 4rem; gap: 2rem; }
+      #hero { grid-template-columns: 1fr; align-items: start; padding: 5rem 5vw 4rem; gap: 2rem; }
       .hero-anim-wrap { display: none; }
       #about { grid-template-columns: 1fr; gap: 3rem; }
       .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
@@ -1315,7 +1315,7 @@
           highlightEl.classList.remove('entering');
         }));
       }, 180);
-    }, 1000);
+    }, 2000);
   }
 
   // Scroll reveal
